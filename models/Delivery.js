@@ -7,16 +7,16 @@ const deliverySchema = new Schema({
     required: true
   },
   originAddress: {
-    type: String || Number,
+    type: String,
     required: true
   },
   deliveryAddress: {
-    type: String || Number,
+    type: String,
     required: true
   },
   date: {
     type: Date,
-    required: true
+    required: true,
   }
 }, {timestamps: true})
 

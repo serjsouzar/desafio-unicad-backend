@@ -7,7 +7,7 @@ const deliveryController = {
         name: req.body.name,
         originAddress: req.body.originAddress,
         deliveryAddress: req.body.deliveryAddress,
-        date: req.body.date
+        date: req.body.date,
       };
 
       const response = await DeliveryModel.create(newDelivery);
@@ -21,7 +21,17 @@ const deliveryController = {
     try {
       const delivery = await DeliveryModel.find();
 
-      res.status(200).json({ delivery });
+      res.status(200).json({ delivery }).end();
+    } catch (error) {
+      console.log("Error", error);
+    }
+  },
+
+  deleteAll: async (req, res) => {
+    try {
+      const delivery = await DeliveryModel.deleteMany();
+
+      res.status(200).json({ delivery }).end();
     } catch (error) {
       console.log("Error", error);
     }
