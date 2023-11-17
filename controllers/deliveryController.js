@@ -2,7 +2,7 @@ const { error } = require("template/lib/utils");
 const { Delivery: DeliveryModel } = require("../models/Delivery");
 
 const deliveryController = {
-  create: async (req, res) => {
+  create: (req, res) => {
     try {
       const newDelivery = {
         name: req.body.name,
@@ -13,9 +13,13 @@ const deliveryController = {
 
       if (!checkDelivery(newDelivery)) throw error;
 
-      const response = await DeliveryModel.create(newDelivery);
-      console.log(response);
-      res.status(201).json({ response, msg: "Entrega criada com sucesso" });
+      //const response = await DeliveryModel.create(newDelivery);
+      let response;
+      postDelivery(newDelivery, response);
+
+      res
+        .status(201)
+        .json({ response: response, msg: "Entrega criada com sucesso" });
     } catch (error) {
       res.status(500).json({ response, msg: "Erro na criação da entrega" });
     }
@@ -32,12 +36,11 @@ const deliveryController = {
   },
 };
 
-function postDelivery(req) {
-  //validar a requisição
+async function postDelivery(req, res) {
   if (!checkDelivery(req)) throw error;
-  //tentar salvar a requisição na api
-  //verificar o retorno da api
-  //retornar sucesso
+  res = await DeliveryModel.create(req);
+  if (!res) throw error;
+  return true;
 }
 
 function checkDelivery(deliveryItem) {
@@ -78,4 +81,5 @@ function checkDelivery(deliveryItem) {
 module.exports = {
   deliveryController: deliveryController,
   checkDelivery: checkDelivery,
+  postDelivery: postDelivery,
 };
