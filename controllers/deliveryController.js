@@ -1,4 +1,3 @@
-const { error } = require("template/lib/utils");
 const { Delivery: DeliveryModel } = require("../models/Delivery");
 
 const deliveryController = {
@@ -11,7 +10,7 @@ const deliveryController = {
         date: req.body.date,
       };
 
-      if (!checkDelivery(newDelivery)) throw error;
+      if (!checkDelivery(newDelivery)) throw console.error();
 
       //const response = await DeliveryModel.create(newDelivery);
       let response;
