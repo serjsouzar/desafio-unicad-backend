@@ -9,7 +9,9 @@ para instalar todas as dependencias e então:
 ### `npm start`
 
 Que irá rodar a aplicação na porta 3000
-podendo ser acessada no navegador através da url [http://localhost:3000]
+
+É importante lembrar que no frontend a API esta sendo chamada através da url [https://desafio-unicad-backend.onrender.com/deliveries]
+onde foi efetuado o deploy deste repositorio.
 
 ### `npm test`
 
